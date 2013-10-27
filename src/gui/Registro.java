@@ -8,8 +8,10 @@ package gui;
 
 import codigo.Propietario;
 import codigo.Vehiculo;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -232,7 +234,7 @@ public class Registro extends javax.swing.JDialog {
 
         jTextField6.setColumns(10);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Sólo para camiones"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true), "Sólo para camiones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.lightGray));
 
         jCheckBox1.setText("Mercancía peligrosa");
         jCheckBox1.setEnabled(false);
@@ -385,22 +387,27 @@ public class Registro extends javax.swing.JDialog {
         // Si es un camión, habilitamos los controles de longitud y mercancía peligrosa
         if ("Camión".equals(tipoVehiculo)) {
             //jPanel4.setBorder(bordePanelCamion);
-            habilitarPanelCamion(true);
+            habilitarPanelCamion(true, Color.BLACK);
         }
         else { // Si se ha elegido otro tipo de vehículo, volvemos a deshabilitar los componentes del panel del camión
-            habilitarPanelCamion(false);
+            habilitarPanelCamion(false, Color.LIGHT_GRAY);
         }
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * Este método sirve para habilitar/deshabilitar los controles del panel para camiones
+     * No sólo habilita/deshabilita los controles, sino que también cambia el color del borde 
+     * y del título del borde del panel, lo cual tiene su historia.
      * @param habilitar true (habilitar controles dle panel), false (deshabilitar controles del panel)
+     * @color El color para el borde del panel (gris claro para deshabilitar y negro para habilitar)
      */
-    private void habilitarPanelCamion(Boolean habilitar) {
-        Border borde = jPanel4.getBorder();
-        TitledBorder bordePanelCamion = new TitledBorder("Just a test");
+    private void habilitarPanelCamion(Boolean habilitar, Color color) {
         
+        // Crear un borde de grosor 1, esquinas redondeadas y de color el pasado como parámetro
+        Border borde = BorderFactory.createLineBorder(color, 1, true);
+
+        jPanel4.setBorder(BorderFactory.createTitledBorder(borde, "Sólo para camiones", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, color));
         jLabel8.setEnabled(habilitar);
         jTextField7.setEnabled(habilitar);
         jCheckBox1.setEnabled(habilitar);
