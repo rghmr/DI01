@@ -356,16 +356,24 @@ public class Registro extends javax.swing.JDialog {
 
     private void jGuardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarButtonActionPerformed
         // TODO add your handling code here:
-        // Guardamos todos los datos del vehículo
+       
+        // Instsanciamos un objeto Vehiculo y le pasamos los datos de los controles del formulario
+        Vehiculo vehiculo = new Vehiculo(); 
         
-        // Instanciamos un objeto vehículo
-        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setFechaEntrada((Date) jDiaSpinner.getValue()); // Le asignamos la fecha de entrada recogida del spinner
+        vehiculo.setModelo(jTextField5.getText());               // Le asignamos el modelo recogido del text field
+        vehiculo.setMatricula(jTextField6.getText());            // Le asignamos la matrícula recogida del text field
         
-        // Le asignamos la fecha del spinner
-        vehiculo.setFechaEntrada((Date) jDiaSpinner.getValue());
+        // Si es un camión, guardaremos también la longitud y el tipo de mercancía
+        if("Camión".equals((String) jComboBox1.getSelectedItem())) {
+           
+                vehiculo.setMercanciaPeligrosa(jCheckBox1.isSelected());  // True si el checkbox está marcado
+                vehiculo.setLongitud(Double.parseDouble(jTextField7.getText()));
+        }
         
         // Instanciamos un objeto propietario y le pasamos los datos de los controles del formulario
         Propietario propietario = new Propietario();
+        
         propietario.setNombre(jTextField1.getText());
         propietario.setApellidos(jTextField2.getText());
         propietario.setDni(jTextField3.getText());
@@ -376,7 +384,7 @@ public class Registro extends javax.swing.JDialog {
         // Por último, añadimos el vehículo a la lista
         this.listaVehiculos.add(vehiculo);
                
-        // Ocultamos el JDialog y volvemos al formulario principal (Consulta)   
+        // Ocultamos el JDialog para volver al formulario principal (Consulta)   
         this.setVisible(false); 
     }//GEN-LAST:event_jGuardarButtonActionPerformed
 
