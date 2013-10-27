@@ -358,21 +358,26 @@ public class Registro extends javax.swing.JDialog {
         // TODO add your handling code here:
         // Guardamos todos los datos del vehículo
         
+        // Instanciamos un objeto vehículo
         Vehiculo vehiculo = new Vehiculo();
         
+        // Le asignamos la fecha del spinner
         vehiculo.setFechaEntrada((Date) jDiaSpinner.getValue());
         
+        // Instanciamos un objeto propietario y le pasamos los datos de los controles del formulario
         Propietario propietario = new Propietario();
         propietario.setNombre(jTextField1.getText());
         propietario.setApellidos(jTextField2.getText());
         propietario.setDni(jTextField3.getText());
         
+        // Añadimos al vehículo su propietario
         vehiculo.setPropietario(propietario);
         
-        this.listaVehiculos.add(vehiculo); // añadimos el vehiculo a la lista
+        // Por último, añadimos el vehículo a la lista
+        this.listaVehiculos.add(vehiculo);
                
-        
-        this.setVisible(false); // Ocultamos el JDialog y volvemos al formulario principal (Consulta)   
+        // Ocultamos el JDialog y volvemos al formulario principal (Consulta)   
+        this.setVisible(false); 
     }//GEN-LAST:event_jGuardarButtonActionPerformed
 
     private void jCancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarButtonActionPerformed

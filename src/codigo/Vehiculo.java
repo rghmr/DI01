@@ -14,8 +14,10 @@ import java.util.Date;
 public class Vehiculo {
     
     // Atributos
-    private Propietario propietario; // Propietario del vehículo
-    private Date        fechaEntrada; // Fecha de entrada en el garaje  
+    protected Propietario propietario;  // Propietario del vehículo
+    protected Date        fechaEntrada; // Fecha de entrada en el garaje  
+    private String      matricula;    // Matrícula del vehículo
+    private String      modelo;       // Modelo del vehículo
 
     /**
      * @return the propietario
@@ -43,6 +45,34 @@ public class Vehiculo {
      */
     public void setFechaEntrada(Date fechaEntrada) {
         this.fechaEntrada = fechaEntrada;
+    }
+
+    /**
+     * @return the matricula
+     */
+    public String getMatricula() {
+        return matricula;
+    }
+
+    /**
+     * @param matricula the matricula to set
+     */
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    /**
+     * @return the modelo
+     */
+    public String getModelo() {
+        return modelo;
+    }
+
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
     
 }
