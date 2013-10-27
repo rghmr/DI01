@@ -27,6 +27,12 @@ public class Consulta extends javax.swing.JFrame {
         
         // Instanciar el formulario de registro. En principio no es visible.
         this.altaVehiculo = new Registro(this, true);
+        
+        // Ampliar la anchura de la tercera columna (fecha). 
+        // No he logrado hacerlo gráficamente con el Swing builder de NetBeans
+                jTablaVehiculos.getColumnModel().getColumn(0).setPreferredWidth(150);
+                        jTablaVehiculos.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTablaVehiculos.getColumnModel().getColumn(2).setPreferredWidth(250);
     }
 
     /**
@@ -47,6 +53,7 @@ public class Consulta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTablaVehiculos.setBorder(new javax.swing.border.MatteBorder(null));
         jTablaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -95,15 +102,15 @@ public class Consulta extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jMostrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jRegistrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
