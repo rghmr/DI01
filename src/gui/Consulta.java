@@ -153,6 +153,7 @@ public class Consulta extends javax.swing.JFrame {
     private void jRegistrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistrarButtonActionPerformed
         // TODO add your handling code here:
         // Al pulsar este botón se hará visible el diálogo modal para registrar el nuevo vehículo
+        this.altaVehiculo.limpiarControles();
         this.altaVehiculo.setVisible(true);
     }//GEN-LAST:event_jRegistrarButtonActionPerformed
 
