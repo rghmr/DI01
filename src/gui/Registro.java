@@ -39,6 +39,7 @@ public class Registro extends javax.swing.JDialog {
      */
     public Registro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        super.setLocationRelativeTo(parent); // Para centrar el JDialog respecto al padre (JFrame)
         initComponents();
         
         // Instanciar la lista de vehículos
