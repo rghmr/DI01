@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -362,32 +363,40 @@ public class Registro extends javax.swing.JDialog {
         // Instanciamos un objeto Vehiculo y le pasamos los datos de los controles del formulario
         Vehiculo vehiculo = new Vehiculo(); 
         
-        vehiculo.setFechaEntrada((Date) jDiaSpinner.getValue()); // Le asignamos la fecha de entrada recogida del spinner
-        vehiculo.setModelo(jModeloTextField.getText());               // Le asignamos el modelo recogido del text field
-        vehiculo.setMatricula(jMatriculaTextField.getText());            // Le asignamos la matrícula recogida del text field
+        vehiculo.setFechaEntrada((Date) this.jDiaSpinner.getValue()); // Le asignamos la fecha de entrada recogida del spinner
+        vehiculo.setModelo(this.jModeloTextField.getText());               // Le asignamos el modelo recogido del text field
+        vehiculo.setMatricula(this.jMatriculaTextField.getText());            // Le asignamos la matrícula recogida del text field
         
-        // Si es un camión, guardaremos también la longitud y el tipo de mercancía
-        if("Camión".equals((String) jTipoVehiculoComboBox.getSelectedItem())) {
+        try {  // Es importante que el try envuelva al this.setVisible para que no se cierre el diálogo
+            
+            // Si es un camión, guardaremos también la longitud y el tipo de mercancía
+            if("Camión".equals((String) this.jTipoVehiculoComboBox.getSelectedItem())) {
            
-                vehiculo.setMercanciaPeligrosa(jMercanciaCheckBox.isSelected());  // True si el checkbox está marcado
-                vehiculo.setLongitud(Double.parseDouble(jLongitudTextField.getText()));
-        }
+                vehiculo.setMercanciaPeligrosa(this.jMercanciaCheckBox.isSelected());  // True si el checkbox está marcado
+                
+                // Puede lanzar una excepción de tipo NumberFormatException
+                vehiculo.setLongitud(Double.parseDouble(this.jLongitudTextField.getText()));                
+            }
         
-        // Instanciamos un objeto propietario y le pasamos los datos de los controles del formulario
-        Propietario propietario = new Propietario();
+            // Instanciamos un objeto propietario y le pasamos los datos de los controles del formulario
+            Propietario propietario = new Propietario();
         
-        propietario.setNombre(jNombreTextField.getText());
-        propietario.setApellidos(jApellidosTextField.getText());
-        propietario.setDni(jDNITextField.getText());
+            propietario.setNombre(jNombreTextField.getText());
+            propietario.setApellidos(jApellidosTextField.getText());
+            propietario.setDni(jDNITextField.getText());
         
-        // Añadimos al vehículo su propietario
-        vehiculo.setPropietario(propietario);
+            // Añadimos al vehículo su propietario
+            vehiculo.setPropietario(propietario);
         
-        // Por último, añadimos el vehículo a la lista
-        this.listaVehiculos.add(vehiculo);
+            // Por último, añadimos el vehículo a la lista
+            this.listaVehiculos.add(vehiculo);
                
-        // Ocultamos el JDialog para volver al formulario principal (Consulta)   
-        this.setVisible(false); 
+            // Ocultamos el JDialog para volver al formulario principal (Consulta)   
+            this.setVisible(false);    
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Campo longitud de camión no válido");
+        }
     }//GEN-LAST:event_jGuardarButtonActionPerformed
 
     /**
@@ -405,9 +414,7 @@ public class Registro extends javax.swing.JDialog {
         // TODO add your handling code here:
         // Ver que tipo de vehículo se ha seleccionado en el combobox
         String tipoVehiculo = (String) this.jTipoVehiculoComboBox.getSelectedItem();
-        
-        //TitledBorder bordePanelCamion = new TitledBorder("Just a test");
-        
+                
         // Si es un camión, habilitamos los controles de longitud y mercancía peligrosa
         if ("Camión".equals(tipoVehiculo)) {
             //jPanel4.setBorder(bordePanelCamion);

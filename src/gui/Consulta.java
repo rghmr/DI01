@@ -28,11 +28,15 @@ public class Consulta extends javax.swing.JFrame {
         // Instanciar el formulario de registro. En principio no es visible.
         this.altaVehiculo = new Registro(this, true);
         
-        // Ampliar la anchura de la tercera columna (fecha). 
+        // Cambiar la anchura de las columnas de la tabla, ya que por defecto hacía las 3 iguales. 
         // No he logrado hacerlo gráficamente con el Swing builder de NetBeans
-                jTablaVehiculos.getColumnModel().getColumn(0).setPreferredWidth(150);
-                        jTablaVehiculos.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTablaVehiculos.getColumnModel().getColumn(0).setPreferredWidth(150);
+        jTablaVehiculos.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTablaVehiculos.getColumnModel().getColumn(2).setPreferredWidth(250);
+        
+        // Hacer visibles los bordes en las celdas de la tabla
+        jTablaVehiculos.setShowVerticalLines(true);
+        jTablaVehiculos.setShowHorizontalLines(true);
     }
 
     /**
@@ -125,7 +129,7 @@ public class Consulta extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,21 +186,22 @@ public class Consulta extends javax.swing.JFrame {
     private void jMostrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMostrarButtonActionPerformed
         // TODO add your handling code here:
         Propietario propietario; // Variable intermedia para el propietario de cada vehículo
+        
         // Utilizamos un objeto de clase SimpleDateFormat para poner la fecha en español
         SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE d MMMM yyyy", new Locale("es", "ES"));
         String fecha;
         
-        // Comprobar si existen propietarios en la lista del diálogo de registro
+        // Comprobar si existen vehículos en la lista del diálogo de registro
         if (this.altaVehiculo.getListaVehiculos().size() > 0) {
             DefaultTableModel model = (DefaultTableModel) this.jTablaVehiculos.getModel();
             model.setRowCount(0); // Con esto limpiamos la tabla antes de mostrar las filas
             
             // Mostrar tantas filas como objetos tiene la lista.
             for(Vehiculo vehiculo : this.altaVehiculo.getListaVehiculos()) {
-                propietario = vehiculo.getPropietario();
+                //propietario = vehiculo.getPropietario();
                 fecha = formatoFecha.format(vehiculo.getFechaEntrada());
                 //this.jTablaVehiculos.getModel().setValueAt(propietario.getNombre(), 1, 1);
-                model.addRow(new Object[]{propietario.getNombre(), propietario.getApellidos(), fecha});
+                model.addRow(new Object[]{vehiculo.getMatricula(), vehiculo.getModelo(), fecha});
             }
             
          
